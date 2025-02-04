@@ -38,11 +38,6 @@
                                             <label for="xmlFileInput" class="form-label">Upload XML File</label>
                                             <input class="form-control" type="file" id="xmlFileInput" accept=".xml">
                                         </div>
-                                        <div class="mb-3">
-                                            <button class="btn btn-primary w-100" onclick="handleFileUpload()">
-                                                <i class="fas fa-upload"></i> Parse XML
-                                            </button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +50,7 @@
                         <!-- Results Section -->
                         <div class="card shadow-sm">
                             <div class="card-header bg-light">
-                                <h5 class="card-title mb-0">Parsed Results</h5>
+                                <h5 class="card-title mb-0">Contents</h5>
                             </div>
                             <div class="card-body">
                                 <div id="result" class="table-responsive"></div>
@@ -71,9 +66,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        function handleFileUpload() {
-            const fileInput = document.getElementById('xmlFileInput');
-            const file = fileInput.files[0];
+        document.getElementById('xmlFileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
             const statusDiv = document.getElementById('status');
             
             if (file) {
@@ -91,7 +85,7 @@
                 statusDiv.style.display = 'block';
                 statusDiv.innerHTML = 'Please select an XML file first.';
             }
-        }
+        });
 
         function parseXML(xmlString) {
             const parser = new DOMParser();
